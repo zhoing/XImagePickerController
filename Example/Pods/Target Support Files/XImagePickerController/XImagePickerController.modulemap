@@ -1,0 +1,6 @@
+framework module XImagePickerController {
+  umbrella header "XImagePickerController-umbrella.h"
+
+  export *
+  module * { export * }
+}

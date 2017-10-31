@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'XImagePickerController_Example' do
+  pod 'XImagePickerController', :path => '../'
+
+  target 'XImagePickerController_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

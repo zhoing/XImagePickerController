@@ -1,0 +1,22 @@
+{
+  "name": "XImagePickerController",
+  "version": "0.1.0",
+  "summary": "A short description of XImagePickerController.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/ming/XImagePickerController",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "ming": "xiaoming.zhao@mljr.com"
+  },
+  "source": {
+    "git": "https://github.com/ming/XImagePickerController.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "XImagePickerController/Classes/**/*"
+}
