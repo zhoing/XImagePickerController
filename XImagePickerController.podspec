@@ -32,7 +32,7 @@ TODO: XImagePickerController 是TZImagePickerController 的swift 仿写优化 �
 
   s.source_files = 'XImagePickerController/Classes/**/*'
   
-  s.resource_bundles = {
+  # s.resource_bundles = {
     'XImagePickerController' => ['XImagePickerController/Assets/XMImagePickerController.bundle']
   }
 
