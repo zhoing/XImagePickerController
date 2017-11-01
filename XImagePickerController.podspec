@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'XImagePickerController'
   s.version          = '0.3.0'
-  s.summary          = 'A short description of XImagePickerController.'
+  s.summary          = 'XImagePickerController 为TZImagePickerController 的swift 仿写版'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,13 +18,13 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+TODO: XImagePickerController 是TZImagePickerController 的swift 仿写优化 去除8.0以下的内容
                        DESC
 
   s.homepage         = 'https://github.com/zhao765882596/XImagePickerController'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'ming' => 'xiaoming.zhao@mljr.com' }
+  s.author           = { 'ming' => 'z4015@qq.com' }
   s.source           = { :git => 'https://github.com/zhao765882596/XImagePickerController.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
@@ -33,7 +33,7 @@ TODO: Add long description of the pod here.
   s.source_files = 'XImagePickerController/Classes/**/*'
   
   s.resource_bundles = {
-    'XImagePickerController' => ['XImagePickerController/Assets/XImagePickerController.bundle']
+    'XImagePickerController' => ['XImagePickerController/Assets/XMImagePickerController.bundle']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
