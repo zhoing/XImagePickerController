@@ -26,7 +26,7 @@ var  xm_isGlobalHideStatusBar: Bool {
 private var isGlobalHideStatusBar: Bool?
 
 
-@objc protocol XMImagePickerControllerDelegate: NSObjectProtocol {
+@objc public protocol XMImagePickerControllerDelegate: NSObjectProtocol {
 //    @optional
     @objc optional func imagePickerController(_ picker: XMImagePickerController, didFinishPickingPhotos photos: Array<UIImage>?, sourceAssets assets: Array<PHAsset>?, isSelectOriginalPhoto: Bool, infos: Array<[AnyHashable : Any]>?)
     @objc optional func imagePickerController(_ picker: XMImagePickerController, didFinishPickingPhotos photos: Array<UIImage>?, sourceAssets assets: Array<PHAsset>?, isSelectOriginalPhoto: Bool)
@@ -41,7 +41,7 @@ private var isGlobalHideStatusBar: Bool?
 
 
 
-class XMImagePickerController: UINavigationController {
+public class XMImagePickerController: UINavigationController {
 
     weak var pickerDelegate: XMImagePickerControllerDelegate? {
         didSet {
@@ -49,7 +49,7 @@ class XMImagePickerController: UINavigationController {
         }
     }
 
-    var maxImagesCount = 9 {
+     public var maxImagesCount = 9 {
         didSet {
             if maxImagesCount > 1 {
                 showSelectBtn = true
@@ -59,20 +59,20 @@ class XMImagePickerController: UINavigationController {
             }
         }
     }
-    var minImagesCount = 0
-    var alwaysEnableDoneBtn = false
-    var sortAscendingByModificationDate = true {
+    public var minImagesCount = 0
+    public var alwaysEnableDoneBtn = false
+    public var sortAscendingByModificationDate = true {
         didSet {
             XMImageManager.manager.sortAscendingByModificationDate = sortAscendingByModificationDate
         }
     }
 
-    var photoWidth: CGFloat = 828.0 {
+    public var photoWidth: CGFloat = 828.0 {
         didSet {
             XMImageManager.manager.photoWidth = photoWidth
         }
     }
-    var photoPreviewMaxWidth: CGFloat = 600.0 {
+    public var photoPreviewMaxWidth: CGFloat = 600.0 {
         didSet {
             if photoPreviewMaxWidth > 800 {
                 photoPreviewMaxWidth = 800
@@ -82,31 +82,31 @@ class XMImagePickerController: UINavigationController {
             XMImageManager.manager.photoPreviewMaxWidth = photoPreviewMaxWidth
         }
     }
-    var timeout: TimeInterval = 15
-    var allowPickingOriginalPhoto = true
-    var allowPickingVideo = true {
+    public var timeout: TimeInterval = 15
+    public var allowPickingOriginalPhoto = true
+    public var allowPickingVideo = true {
         didSet {
             UserDefaults.standard.set(allowPickingVideo, forKey: "xm_allowPickingVideo")
             UserDefaults.standard.synchronize()
         }
     }
 
-    var allowPickingMultipleVideo = false
-    var allowPickingGif = true {
+    public var allowPickingMultipleVideo = false
+    public var allowPickingGif = true {
         didSet {
             UserDefaults.standard.set(allowPickingGif, forKey: "xm_allowPickingGif")
             UserDefaults.standard.synchronize()
         }
     }
-    var allowPickingImage = true {
+    public var allowPickingImage = true {
         didSet {
             UserDefaults.standard.set(allowPickingImage, forKey: "xm_allowPickingImage")
             UserDefaults.standard.synchronize()
         }
     }
-    var allowTakePicture = true
-    var allowPreview = true
-    var autoDismiss = true
+    public var allowTakePicture = true
+    public var allowPreview = true
+    public var autoDismiss = true
 
     var selectedModels: Array<XMAssetModel> = [] {
         didSet {
@@ -117,22 +117,22 @@ class XMImagePickerController: UINavigationController {
             }
         }
     }
-    var selectedAssets: Array<PHAsset> = []
+    public var selectedAssets: Array<PHAsset> = []
 
-    var minPhotoWidthSelectable: CGFloat = 0 {
+    public var minPhotoWidthSelectable: CGFloat = 0 {
         didSet {
             XMImageManager.manager.minPhotoWidthSelectable = minPhotoWidthSelectable
         }
     }
-    var minPhotoHeightSelectable: CGFloat = 0 {
+    public var minPhotoHeightSelectable: CGFloat = 0 {
         didSet {
             XMImageManager.manager.minPhotoHeightSelectable = minPhotoHeightSelectable
         }
     }
 
-    var hideWhenCanNotSelect = false
-    var isStatusBarDefault = false
-    var showSelectBtn = true {
+    public var hideWhenCanNotSelect = false
+    public var isStatusBarDefault = false
+    public var showSelectBtn = true {
         didSet {
             if !showSelectBtn && maxImagesCount > 1 {
                 showSelectBtn = true
@@ -140,7 +140,7 @@ class XMImagePickerController: UINavigationController {
         }
     }
 
-    var allowCrop = false {
+    public var allowCrop = false {
         didSet {
             if maxImagesCount > 1 {
                 allowCrop = false
@@ -151,36 +151,36 @@ class XMImagePickerController: UINavigationController {
             }
         }
     }
-    var cropRect = CGRect.zero {
+    public var cropRect = CGRect.zero {
         didSet {
             cropRectPortrait = cropRect
             cropRectLandscape = CGRect.init(x: (view.xm_height - cropRect.height) * 0.5, y: cropRect.midX, width: cropRect.width, height: cropRect.width)
         }
     }
-    var cropRectPortrait = CGRect.zero
-    var cropRectLandscape = CGRect.zero
-    var isNeedCircleCrop = true
-    var circleCropRadius: CGFloat = 0.0 {
+    public var cropRectPortrait = CGRect.zero
+    public var cropRectLandscape = CGRect.zero
+    public var isNeedCircleCrop = true
+    public var circleCropRadius: CGFloat = 0.0 {
         didSet {
             cropRect = CGRect.init(x: view.xm_width * 0.5 - circleCropRadius, y: view.xm_height * 0.5 - circleCropRadius, width: circleCropRadius * 2.0, height: circleCropRadius * 2.0)
         }
     }
-    var cropViewSettingBlock: ((UIView?) -> Void)?
-    var navLeftBarButtonSettingBlock: ((UIButton?) -> Void)?
+    public var cropViewSettingBlock: ((UIView?) -> Void)?
+    public var navLeftBarButtonSettingBlock: ((UIButton?) -> Void)?
 
-    var isSelectOriginalPhoto = false
+    public var isSelectOriginalPhoto = false
 
-    var takePictureImageName = "takePicture";
-    var photoSelImageName = "photo_sel_photoPickerVc";
-    var photoDefImageName = "photo_def_photoPickerVc";
-    var photoNumberIconImageName = "photo_number_icon";
-    var photoPreviewOriginDefImageName = "preview_original_def";
-    var photoOriginDefImageName = "photo_original_def";
-    var photoOriginSelImageName = "photo_original_sel";
+    public var takePictureImageName = "takePicture";
+    public var photoSelImageName = "photo_sel_photoPickerVc";
+    public var photoDefImageName = "photo_def_photoPickerVc";
+    public var photoNumberIconImageName = "photo_number_icon";
+    public var photoPreviewOriginDefImageName = "preview_original_def";
+    public var photoOriginDefImageName = "photo_original_def";
+    public var photoOriginSelImageName = "photo_original_sel";
 
-    var oKButtonTitleColorNormal = UIColor.init(red: CGFloat(83.0 / 255), green: CGFloat(179.0 / 255), blue: CGFloat(17.0 / 255), alpha: 1.0)
-    var oKButtonTitleColorDisabled = UIColor.init(red: CGFloat(83.0 / 255), green: CGFloat(179.0 / 255), blue: CGFloat(17.0 / 255), alpha: 0.5)
-    var naviBgColor: UIColor? {
+    public var oKButtonTitleColorNormal = UIColor.init(red: CGFloat(83.0 / 255), green: CGFloat(179.0 / 255), blue: CGFloat(17.0 / 255), alpha: 1.0)
+    public var oKButtonTitleColorDisabled = UIColor.init(red: CGFloat(83.0 / 255), green: CGFloat(179.0 / 255), blue: CGFloat(17.0 / 255), alpha: 0.5)
+    public var naviBgColor: UIColor? {
         didSet {
             if naviBgColor != nil {
                 navigationBar.setBackgroundImage(UIImage.image(naviBgColor!), for: UIBarMetrics.default)
@@ -188,49 +188,49 @@ class XMImagePickerController: UINavigationController {
             }
         }
     }
-    var naviShadowColor: UIColor? {
+    public var naviShadowColor: UIColor? {
         didSet {
             if naviShadowColor != nil {
                 navigationBar.shadowImage = UIImage.image(naviShadowColor!)
             }
         }
     }
-    var naviTitleColor = UIColor.white {
+    public var naviTitleColor = UIColor.white {
         didSet {
             configNaviTitleAppearance()
         }
     }
 
-    var barItemTextColor = UIColor.white {
+    public var barItemTextColor = UIColor.white {
         didSet {
             configBarButtonItemAppearance()
         }
     }
-    var naviTitleFont = UIFont.systemFont(ofSize: 17){
+    public var naviTitleFont = UIFont.systemFont(ofSize: 17){
         didSet {
             configNaviTitleAppearance()
         }
     }
-    var barItemTextFont = UIFont.systemFont(ofSize: 15) {
+    public var barItemTextFont = UIFont.systemFont(ofSize: 15) {
         didSet {
             configBarButtonItemAppearance()
         }
     }
 
 
-    var doneBtnTitleStr = Bundle.xm_localizedString(key: "Done")
-    var cancelBtnTitleStr = Bundle.xm_localizedString(key: "Cancel")
-    var previewBtnTitleStr = Bundle.xm_localizedString(key: "Preview")
-    var fullImageBtnTitleStr = Bundle.xm_localizedString(key: "Full image")
-    var settingBtnTitleStr = Bundle.xm_localizedString(key: "Setting")
-    var processHintStr = Bundle.xm_localizedString(key: "Processing...")
+    public var doneBtnTitleStr = Bundle.xm_localizedString(key: "Done")
+    public var cancelBtnTitleStr = Bundle.xm_localizedString(key: "Cancel")
+    public var previewBtnTitleStr = Bundle.xm_localizedString(key: "Preview")
+    public var fullImageBtnTitleStr = Bundle.xm_localizedString(key: "Full image")
+    public var settingBtnTitleStr = Bundle.xm_localizedString(key: "Setting")
+    public var processHintStr = Bundle.xm_localizedString(key: "Processing...")
 
 
-    var didFinishPickingPhotosHandle: ((Array<UIImage>?, Array<PHAsset>?, Bool) -> Void)?
-    var didFinishPickingPhotosWithInfosHandle: ((Array<UIImage>?, Array<PHAsset>?, Bool, Array<Dictionary<AnyHashable, Any>>?) -> Void)?
-    var didFinishPickingGifImageHandle: ((UIImage?, PHAsset?) -> Void)?
-    var didFinishPickingVideoHandle: ((UIImage?, PHAsset?) -> Void)?
-    var imagePickerControllerDidCancelHandle: (() -> Void)?
+    public var didFinishPickingPhotosHandle: ((Array<UIImage>?, Array<PHAsset>?, Bool) -> Void)?
+    public var didFinishPickingPhotosWithInfosHandle: ((Array<UIImage>?, Array<PHAsset>?, Bool, Array<Dictionary<AnyHashable, Any>>?) -> Void)?
+    public var didFinishPickingGifImageHandle: ((UIImage?, PHAsset?) -> Void)?
+    public var didFinishPickingVideoHandle: ((UIImage?, PHAsset?) -> Void)?
+    public var imagePickerControllerDidCancelHandle: (() -> Void)?
 
     private var settingBtn: UIButton?
     private var tipLabel: UILabel?
@@ -258,7 +258,7 @@ class XMImagePickerController: UINavigationController {
     }
 
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         navigationBar.barStyle = .black
@@ -290,7 +290,7 @@ class XMImagePickerController: UINavigationController {
         barItme.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : barItemTextColor, NSAttributedStringKey.font : barItemTextFont], for: .normal)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         originStatusBarStyle = UIApplication.shared.statusBarStyle
         if isStatusBarDefault {
@@ -299,7 +299,7 @@ class XMImagePickerController: UINavigationController {
             UIApplication.shared.statusBarStyle = .lightContent
         }
     }
-    override func viewWillDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIApplication.shared.statusBarStyle = originStatusBarStyle
         hideProgressHUD()
@@ -308,7 +308,7 @@ class XMImagePickerController: UINavigationController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    init(delegate:XMImagePickerControllerDelegate, pushPhotoPickerVc: Bool = true, maxImagesCount: Int = 9, columnNumber:Int = 4) {
+    public init(delegate:XMImagePickerControllerDelegate, pushPhotoPickerVc: Bool = true, maxImagesCount: Int = 9, columnNumber:Int = 4) {
         let albumPickVc = XMAlbumPickerController()
         albumPickVc.columnNumber = columnNumber
         super.init(rootViewController: albumPickVc)
@@ -417,9 +417,9 @@ class XMImagePickerController: UINavigationController {
     }
 
     @objc func settingBtnClick() {
-        if UIApplication.shared.canOpenURL(URL.init(string: UIApplicationOpenSettingsURLString)!){
-            UIApplication.shared.openURL(URL.init(string: UIApplicationOpenSettingsURLString)!)
-        }
+//        if UIApplication.shared.canpublicURL(URL.init(string: UIApplicationOpenSettingsURLString)!){
+//            UIApplication.shared.publicURL(URL.init(string: UIApplicationOpenSettingsURLString)!)
+//        }
     }
     func pushPhotoPicker() {
         if pushPhotoPickerVc {
@@ -442,7 +442,7 @@ class XMImagePickerController: UINavigationController {
         return alert
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     func showProgressHUD() {
@@ -481,7 +481,7 @@ class XMImagePickerController: UINavigationController {
         }
     }
 
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+    override public func pushViewController(_ viewController: UIViewController, animated: Bool) {
         viewController.automaticallyAdjustsScrollViewInsets = false
         if timer != nil {
             timer?.invalidate()
@@ -491,7 +491,7 @@ class XMImagePickerController: UINavigationController {
     }
 // MARK: - UIContentContainer
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         willInterfaceOrientionChange()
         if size.width > size.height {
             cropRect = cropRectLandscape
