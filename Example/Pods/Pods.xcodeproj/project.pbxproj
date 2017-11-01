@@ -25,6 +25,7 @@
 		3AA48E0C1FA897850028BC55 /* XMLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA48DFD1FA897850028BC55 /* XMLocationManager.swift */; };
 		3AA48E0D1FA897850028BC55 /* XMAssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA48DFE1FA897850028BC55 /* XMAssetModel.swift */; };
 		3AA48E0E1FA897850028BC55 /* XMPhotoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA48DFF1FA897850028BC55 /* XMPhotoPreviewView.swift */; };
+		3AEB2C5C1FA99AF000A41064 /* XMImagePickerController.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 3AA48E0F1FA897BE0028BC55 /* XMImagePickerController.bundle */; };
 		3EAF8884BB216ABF270D22C49DB197B0 /* Pods-XImagePickerController_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 61632F0FBAC2A353C490883AADCA498C /* Pods-XImagePickerController_Example-dummy.m */; };
 		5F68EEA0116817B78C902DE84807B0CE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		60064DCE1A20313D2848F4B48EB4184F /* Pods-XImagePickerController_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCFE0321D636DE10CF21B901416D8D /* Pods-XImagePickerController_Tests-dummy.m */; };
@@ -378,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AEB2C5C1FA99AF000A41064 /* XMImagePickerController.bundle in Sources */,
 				3AA48E0A1FA897850028BC55 /* XMProgressView.swift in Sources */,
 				3AA48E091FA897850028BC55 /* XMImagePickerController.swift in Sources */,
 				3AA48E081FA897850028BC55 /* XMImageManager.swift in Sources */,
