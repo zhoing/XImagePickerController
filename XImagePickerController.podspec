@@ -32,9 +32,7 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'XImagePickerController/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'XImagePickerController' => ['XImagePickerController/Assets/*.png']
-  # }
+   s.resource_bundles = 'XImagePickerController/Assets/**/*'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
