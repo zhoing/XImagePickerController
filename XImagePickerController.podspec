@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XImagePickerController'
-  s.version          = '0.1.0'
+  s.version          = '0.3.0'
   s.summary          = 'A short description of XImagePickerController.'
 
 # This description is used to generate tags and improve search results.
@@ -21,18 +21,20 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/ming/XImagePickerController'
+  s.homepage         = 'https://github.com/zhao765882596/XImagePickerController'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'ming' => 'xiaoming.zhao@mljr.com' }
-  s.source           = { :git => 'https://github.com/ming/XImagePickerController.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/zhao765882596/XImagePickerController.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'XImagePickerController/Classes/**/*'
   
-   s.resource_bundles = 'XImagePickerController/Assets/**/*'
+  s.resource_bundles = {
+    'XImagePickerController' => ['XImagePickerController/Assets/XImagePickerController.bundle']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
