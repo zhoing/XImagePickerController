@@ -15,7 +15,8 @@ extension Bundle {
         if imagePickerBundle == nil {
             let frameworkBundle = Bundle.init(for: XMImagePickerController.classForCoder())
             let ResourcesBundle = Bundle.init(path: frameworkBundle.path(forResource: "XImagePickerController", ofType: "bundle") ?? "")
-            imagePickerBundle = Bundle.init(path: ResourcesBundle?.path(forResource: "XImagePickerController", ofType: "bundle") ?? "")
+            let bundle = Bundle.init(path: ResourcesBundle?.path(forResource: "XImagePickerController", ofType: "bundle") ?? "")
+            imagePickerBundle = bundle ?? ResourcesBundle
         }
         return imagePickerBundle ?? Bundle.main
         
