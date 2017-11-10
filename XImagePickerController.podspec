@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XImagePickerController'
-  s.version          = '0.4.0'
+  s.version          = '0.5.1'
   s.summary          = 'XImagePickerController 为TZImagePickerController 的swift 仿写版'
 
 # This description is used to generate tags and improve search results.
