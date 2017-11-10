@@ -14,12 +14,9 @@ extension Bundle {
     static var xm_imagePickerBundle: Bundle {
         if imagePickerBundle == nil {
             let frameworkBundle = Bundle.init(for: XMImagePickerController.classForCoder())
-            let ResourcesBundle = Bundle.init(path: frameworkBundle.path(forResource: "XImagePickerController", ofType: "bundle") ?? "")
-            let bundle = Bundle.init(path: ResourcesBundle?.path(forResource: "XImagePickerController", ofType: "bundle") ?? "")
-            imagePickerBundle = bundle ?? ResourcesBundle
+            imagePickerBundle = Bundle.init(path: frameworkBundle.path(forResource: "XImagePickerController", ofType: "bundle") ?? "")
         }
         return imagePickerBundle ?? Bundle.main
-        
     }
     class func xm_localizedString(key: String)  -> String {
         return Bundle.xm_localizedString(key: key, value: "")

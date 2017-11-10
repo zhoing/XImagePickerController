@@ -25,7 +25,6 @@
 		3AA48E0C1FA897850028BC55 /* XMLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA48DFD1FA897850028BC55 /* XMLocationManager.swift */; };
 		3AA48E0D1FA897850028BC55 /* XMAssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA48DFE1FA897850028BC55 /* XMAssetModel.swift */; };
 		3AA48E0E1FA897850028BC55 /* XMPhotoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA48DFF1FA897850028BC55 /* XMPhotoPreviewView.swift */; };
-		3AEB2C5C1FA99AF000A41064 /* XMImagePickerController.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 3AA48E0F1FA897BE0028BC55 /* XMImagePickerController.bundle */; };
 		3EAF8884BB216ABF270D22C49DB197B0 /* Pods-XImagePickerController_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 61632F0FBAC2A353C490883AADCA498C /* Pods-XImagePickerController_Example-dummy.m */; };
 		5F68EEA0116817B78C902DE84807B0CE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		60064DCE1A20313D2848F4B48EB4184F /* Pods-XImagePickerController_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CCFE0321D636DE10CF21B901416D8D /* Pods-XImagePickerController_Tests-dummy.m */; };
@@ -50,6 +49,7 @@
 		07CCFE0321D636DE10CF21B901416D8D /* Pods-XImagePickerController_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-XImagePickerController_Tests-dummy.m"; sourceTree = "<group>"; };
 		08E9CD462A094E64F8F382C3ABC31E34 /* Pods-XImagePickerController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-XImagePickerController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		2352DC13FE543770847B721FE79C5085 /* Pods-XImagePickerController_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-XImagePickerController_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		3A1C27FE1FB58F940049FFED /* XImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = XImagePickerController.bundle; path = ../../../../XImagePickerController/Assets/XImagePickerController.bundle; sourceTree = "<group>"; };
 		3AA48DF11FA897840028BC55 /* UIView_XMImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIView_XMImagePicker.swift; path = XImagePickerController/Classes/UIView_XMImagePicker.swift; sourceTree = "<group>"; };
 		3AA48DF21FA897840028BC55 /* XMPhotoPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMPhotoPickerController.swift; path = XImagePickerController/Classes/XMPhotoPickerController.swift; sourceTree = "<group>"; };
 		3AA48DF31FA897840028BC55 /* XMPhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMPhotoPreviewCell.swift; path = XImagePickerController/Classes/XMPhotoPreviewCell.swift; sourceTree = "<group>"; };
@@ -65,7 +65,6 @@
 		3AA48DFD1FA897850028BC55 /* XMLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMLocationManager.swift; path = XImagePickerController/Classes/XMLocationManager.swift; sourceTree = "<group>"; };
 		3AA48DFE1FA897850028BC55 /* XMAssetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMAssetModel.swift; path = XImagePickerController/Classes/XMAssetModel.swift; sourceTree = "<group>"; };
 		3AA48DFF1FA897850028BC55 /* XMPhotoPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMPhotoPreviewView.swift; path = XImagePickerController/Classes/XMPhotoPreviewView.swift; sourceTree = "<group>"; };
-		3AA48E0F1FA897BE0028BC55 /* XMImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = XMImagePickerController.bundle; path = ../../../../XImagePickerController/Assets/XMImagePickerController.bundle; sourceTree = "<group>"; };
 		3DB7F0090503C35F805BE129718A73E4 /* XImagePickerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "XImagePickerController-dummy.m"; sourceTree = "<group>"; };
 		48C402EC79B66B76CCADD3E931B98FC8 /* XImagePickerController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = XImagePickerController.xcconfig; sourceTree = "<group>"; };
 		4D98A01A11481FC7BADCF34E602D2645 /* Pods-XImagePickerController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-XImagePickerController_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -231,7 +230,7 @@
 		D245719FADC32BB66731DAB1EC2764FA /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3AA48E0F1FA897BE0028BC55 /* XMImagePickerController.bundle */,
+				3A1C27FE1FB58F940049FFED /* XImagePickerController.bundle */,
 				0051F1E5EBEBD92A997C92BC808B81DB /* Info.plist */,
 				B377F0211A8B400C895CCF0E7416D566 /* XImagePickerController.modulemap */,
 				48C402EC79B66B76CCADD3E931B98FC8 /* XImagePickerController.xcconfig */,
@@ -379,7 +378,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AEB2C5C1FA99AF000A41064 /* XMImagePickerController.bundle in Sources */,
 				3AA48E0A1FA897850028BC55 /* XMProgressView.swift in Sources */,
 				3AA48E091FA897850028BC55 /* XMImagePickerController.swift in Sources */,
 				3AA48E081FA897850028BC55 /* XMImageManager.swift in Sources */,
