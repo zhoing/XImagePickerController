@@ -349,7 +349,7 @@ public class XMImagePickerController: UINavigationController {
             settingBtn?.addTarget(self, action: #selector(self.settingBtnClick), for: .touchUpInside)
             view.addSubview(settingBtn!)
 
-            timer = Timer.init(timeInterval: 0.2, target: self, selector: #selector(self.observeAuthrizationStatusChange), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.observeAuthrizationStatusChange), userInfo: nil, repeats: true)
         } else {
             pushPhotoPicker()
         }
@@ -417,9 +417,9 @@ public class XMImagePickerController: UINavigationController {
     }
 
     @objc func settingBtnClick() {
-//        if UIApplication.shared.canpublicURL(URL.init(string: UIApplicationOpenSettingsURLString)!){
-//            UIApplication.shared.publicURL(URL.init(string: UIApplicationOpenSettingsURLString)!)
-//        }
+        if UIApplication.shared.canOpenURL(URL.init(string: UIApplicationOpenSettingsURLString) ?? URL.init(fileURLWithPath: "")) {
+            UIApplication.shared.openURL(URL.init(string: UIApplicationOpenSettingsURLString)!)
+        }
     }
     func pushPhotoPicker() {
         if pushPhotoPickerVc {
