@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XImagePickerController'
-  s.version          = '0.5.2'
+  s.version          = '0.6'
   s.summary          = 'XImagePickerController 为TZImagePickerController 的swift 仿写版'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,9 @@ TODO: XImagePickerController 是TZImagePickerController 的swift 仿写优化 �
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'XImagePickerController/Classes/**/*'
-  s.resource_bundles = 'XImagePickerController/Assets/XImagePickerController.bundle'
+  s.resource_bundles = {
+    'XImagePickerController' => 'XImagePickerController/Assets/XImagePickerController.bundle'
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
