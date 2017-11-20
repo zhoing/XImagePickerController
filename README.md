@@ -5,10 +5,30 @@
 [![License](https://img.shields.io/cocoapods/l/XImagePickerController.svg?style=flat)](http://cocoapods.org/pods/XImagePickerController)
 [![Platform](https://img.shields.io/cocoapods/p/XImagePickerController.svg?style=flat)](http://cocoapods.org/pods/XImagePickerController)
 
+ A clone of UIImagePickerController, support picking multiple photos、original photo、GIF、video, also allow preview photo and video, support iOS8+.
+
 ## Example
+```swift
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+let imagePickerVc = XMImagePickerController.init(delegate: self, pushPhotoPickerVc: true, maxImagesCount: maxCount, columnNumber: 3)
+imagePickerVc.isSelectOriginalPhoto = true
+imagePickerVc.naviBgColor = UIColor.white
+imagePickerVc.barItemTextColor = mainColor
+imagePickerVc.naviTitleColor = c22
+imagePickerVc.naviShadowColor = cde
+imagePickerVc.isStatusBarDefault = true
 
+imagePickerVc.allowTakePicture = true
+imagePickerVc.allowPickingVideo = false
+imagePickerVc.allowPickingImage = true
+imagePickerVc.allowPickingGif = false
+
+imagePickerVc.allowPickingOriginalPhoto = false
+imagePickerVc.sortAscendingByModificationDate = false
+imagePickerVc.showSelectBtn = true
+imagePickerVc.allowCrop = false
+rootVC.present(imagePickerVc, animated: true, completion: nil)
+```
 ## Requirements
 
 ## Installation
