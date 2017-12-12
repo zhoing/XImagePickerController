@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let isIPnoneX = UIScreen.main.bounds.height > 736.0
+
 enum TZOscillatoryAnimationType: Int {
     case ToBigger = 0
     case ToSmaller = 1

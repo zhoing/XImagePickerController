@@ -90,7 +90,7 @@ class XMPhotoPreviewView: UIView , UIScrollViewDelegate{
         super.init(frame: frame)
         scrollView.bouncesZoom = true
         scrollView.maximumZoomScale = 2.5
-        scrollView.minimumZoomScale = 1.0
+        scrollView.minimumZoomScale = 0.5
         scrollView.isMultipleTouchEnabled = true
         scrollView.delegate = self
         scrollView.scrollsToTop = false

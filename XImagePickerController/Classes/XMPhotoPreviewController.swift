@@ -33,6 +33,7 @@ class XMPhotoPreviewController: UIViewController, UICollectionViewDataSource, UI
     private var collectionView:UICollectionView?
     private var naviBar = UIView()
     private var backButton = UIButton.init(type: .custom)
+    private var titleLabel = UILabel()
     private var selectButton = UIButton.init(type: .custom)
 
     private var toolBar = UIView()
@@ -54,7 +55,6 @@ class XMPhotoPreviewController: UIViewController, UICollectionViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        XMImageManager.manager.shouldFixOrientation = true
         if navigationController is XMImagePickerController {
             let imagePick = (navigationController as! XMImagePickerController)
             if models.count == 0 {
@@ -105,6 +105,10 @@ class XMPhotoPreviewController: UIViewController, UICollectionViewDataSource, UI
         backButton.setTitleColor(UIColor.white, for: .normal)
         backButton.addTarget(self, action: #selector(self.backButtonClick), for: .touchUpInside)
         naviBar.addSubview(backButton)
+
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = UIColor.white
+        naviBar.addSubview(titleLabel)
 
         if let imagePick = navigationController as? XMImagePickerController {
             selectButton.setImage(UIImage.imageNamedFromMyBundle(name: imagePick.photoDefImageName), for: .normal)
@@ -213,11 +217,13 @@ class XMPhotoPreviewController: UIViewController, UICollectionViewDataSource, UI
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        naviBar.frame = CGRect.init(x: 0, y: 0, width: view.xm_width, height: 64)
-        toolBar.frame = CGRect.init(x: 0, y: view.xm_height - 44, width: view.xm_width, height: 44)
+        naviBar.frame = CGRect.init(x: 0, y: 0, width: view.xm_width, height: isIPnoneX ? 88 : 64)
+        toolBar.frame = CGRect.init(x: 0, y: view.xm_height - (isIPnoneX ? 64 : 44), width: view.xm_width, height: (isIPnoneX ? 64 : 44))
 
-        backButton.frame = CGRect.init(x: 10, y: 10, width: 44, height: 44)
-        selectButton.frame = CGRect.init(x: view.xm_width - 54, y: 10, width: 42, height: 42)
+        backButton.frame = CGRect.init(x: 10, y: isIPnoneX ? 22 : 10, width: 44, height: 44)
+        selectButton.frame = CGRect.init(x: view.xm_width - 54, y: isIPnoneX ? 22 : 10, width: 42, height: 44)
+        titleLabel.frame = CGRect.init(x: 54, y: isIPnoneX ? 34 : 10, width: view.xm_width - 108, height: 44)
+
         if offsetItemCount > 0 {
             let offsetX: CGFloat = offsetItemCount * (view.xm_width + 20)
             collectionView?.contentOffset = CGPoint.init(x: offsetX, y: 0)
@@ -229,12 +235,12 @@ class XMPhotoPreviewController: UIViewController, UICollectionViewDataSource, UI
         }
         if imagePick?.allowPickingOriginalPhoto == true {
             let fullImageWidth = imagePick?.fullImageBtnTitleStr.boundingRect(with: CGSize.init(width: Int.max, height: Int.max), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13)], context: nil).width ?? 0.0
-            originalPhotoButton.frame = CGRect.init(x: 0, y: 0, width: fullImageWidth + 56, height: 44)
-            originalPhotoLabel.frame = CGRect.init(x: fullImageWidth + 42, y: 0, width: 80, height: 44)
+            originalPhotoButton.frame = CGRect.init(x: 0, y: 0, width: fullImageWidth + 56, height: (isIPnoneX ? 54 : 44))
+            originalPhotoLabel.frame = CGRect.init(x: fullImageWidth + 42, y: 0, width: 80, height: (isIPnoneX ? 54 : 44))
         }
         collectionView?.frame = CGRect.init(x: -10, y: 0, width: view.xm_width + 20, height: view.xm_height)
-        doneButton.frame = CGRect.init(x: view.xm_width - 44 - 12, y: 0, width: 44, height: 44)
-        numberImageView.frame = CGRect.init(x: view.xm_width - 56 - 28, y: 7, width: 30, height: 30)
+        doneButton.frame = CGRect.init(x: view.xm_width - 44 - 12, y: 0, width: 44, height: (isIPnoneX ? 54 : 44))
+        numberImageView.frame = CGRect.init(x: view.xm_width - 56 - 28, y: 12, width: 30, height: 30)
         numberLabel.frame = numberImageView.frame
 
         configCropView()
@@ -445,6 +451,22 @@ class XMPhotoPreviewController: UIViewController, UICollectionViewDataSource, UI
                 }
             }
         }
+        if let index = imagePick.selectedModels.index(of: model), !imagePick.showTitle(index: index).isEmpty {
+            let modelTitle = imagePick.showTitle(index: index)
+
+            let attStr = NSMutableAttributedString.init(string: modelTitle)
+            if modelTitle.count > 0 {
+                if modelTitle.hasPrefix("＊") {
+                    attStr.addAttributes([NSAttributedStringKey.foregroundColor : UIColor.red], range: NSRange.init(location: 0, length: 1))
+                }
+                titleLabel.attributedText = attStr
+            } else {
+                titleLabel.attributedText = attStr
+            }
+        } else {
+            titleLabel.attributedText = nil
+        }
+
         doneButton.isHidden = false
         selectButton.isHidden = imagePick.showSelectBtn
         if XMImageManager.manager.isPhotoSelectableWithAsset(asset: model.asset) {

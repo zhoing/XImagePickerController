@@ -42,11 +42,17 @@ private var isGlobalHideStatusBar: Bool?
 
 
 public class XMImagePickerController: UINavigationController {
-
+    public var showTitles: Array<String> = []
     weak var pickerDelegate: XMImagePickerControllerDelegate? {
         didSet {
             XMImageManager.manager.pickerDelegate = pickerDelegate
         }
+    }
+    func showTitle(index: Int) -> String {
+        if index < showTitles.count {
+            return showTitles[index]
+        }
+        return ""
     }
 
      public var maxImagesCount = 9 {

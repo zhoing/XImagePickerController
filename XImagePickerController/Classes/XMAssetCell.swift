@@ -14,6 +14,53 @@ class XMAssetCell: UICollectionViewCell {
         super.init(frame: frame)
     }
     var imageProgressUpdate: (() -> Void)?
+    var title: String? {
+        set {
+            if newValue?.isEmpty == false {
+                titleLabel.isHidden = false
+                titleView.isHidden = false
+                let attStr = NSMutableAttributedString.init(string: newValue!)
+                if newValue!.count > 0 {
+                    if newValue!.hasPrefix("＊") {
+                        attStr.addAttributes([NSAttributedStringKey.foregroundColor : UIColor.red], range: NSRange.init(location: 0, length: 1))
+                    }
+                    titleLabel.attributedText = attStr
+                } else {
+                    titleLabel.attributedText = attStr
+                }
+            } else {
+                titleLabel.isHidden = true
+                titleView.isHidden = true
+                titleLabel.attributedText = nil
+            }
+        }
+        get {
+            return ""
+        }
+    }
+
+
+    private var _titleLabel: UILabel?
+    private var titleLabel: UILabel {
+        if _titleLabel == nil {
+            _titleLabel = UILabel()
+            _titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            _titleLabel?.textAlignment = .center
+            _titleLabel?.textColor = UIColor.white
+            titleView.addSubview(_titleLabel!)
+        }
+        return _titleLabel!
+    }
+    private var _titleView: UIImageView?
+    private var titleView: UIImageView {
+        if _titleView == nil {
+            _titleView = UIImageView.init(image: UIImage.init(named: "photo_layer"))
+            _titleView?.clipsToBounds = true
+            _titleView?.contentMode = .scaleAspectFill
+            contentView.addSubview(_titleView!)
+        }
+        return _titleView!
+    }
 
     var _selectPhotoButton: UIButton?
     var selectPhotoButton: UIButton {
@@ -234,6 +281,8 @@ class XMAssetCell: UICollectionViewCell {
         _bottomView?.frame = CGRect.init(x: 0.0, y: xm_height - 17, width: xm_width, height: 17)
         _videoImgView?.frame = CGRect.init(x: 8, y: 0, width: 17, height: 17)
         _timeLength?.frame = CGRect.init(x: videoImgView.xm_right, y: 0.0, width: xm_width - videoImgView.xm_right - 5.0, height: 17.0)
+        _titleLabel?.frame = CGRect.init(x: 0, y: 8, width: xm_width, height: 14)
+        _titleView?.frame = CGRect.init(x: 0, y: xm_height - 30, width: xm_width, height: 30)
 
         type = model?.type ?? .Photo
         let tmp = showSelectBtn

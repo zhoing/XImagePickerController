@@ -72,8 +72,8 @@ class XMGifPhotoPreviewController: UIViewController {
         super.viewDidLayoutSubviews()
         previewView.frame = view.bounds
         previewView.scrollView.frame = view.bounds
-        doneButton.frame = CGRect.init(x: view.xm_width - 44.0 - 12.0, y: 0.0, width: 44.0, height: 44.0)
-        toolBar.frame = CGRect.init(x: 0.0, y: view.xm_height - 44.0, width: view.xm_width, height: 44.0)
+        doneButton.frame = CGRect.init(x: view.xm_width - 44.0 - 12.0, y: (isIPnoneX ? 5 : 3), width: 44.0, height: 44.0)
+        toolBar.frame = CGRect.init(x: 0.0, y: view.xm_height - (isIPnoneX ? 64 : 50), width: view.xm_width, height: (isIPnoneX ? 64 : 50))
 
     }
     func signleTapAction() {

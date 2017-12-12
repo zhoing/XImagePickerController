@@ -75,6 +75,7 @@ class XMPhotoPickerController : UIViewController, UICollectionViewDataSource,UIC
             btn.addTarget(self, action: #selector(self.navLeftBarButtonClick), for: .touchUpInside)
             navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: btn)
         }
+        self.configCollectionView()
         showTakePhotoBtn = (albumModel == nil || albumModel?.isCameraRoll == true) && imagePick?.allowTakePicture == true
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangeStatusBarOrientationNotification), name: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation, object: nil)
 
@@ -111,7 +112,7 @@ class XMPhotoPickerController : UIViewController, UICollectionViewDataSource,UIC
             let imagePick = self.navigationController as? XMImagePickerController
             imagePick?.hideProgressHUD()
             self.checkSelectedModels()
-            self.configCollectionView()
+            self.collectionView?.reloadData()
             self.collectionView?.isHidden = false
             self.configBottomToolBar()
             self.scrollCollectionViewToBottom()
@@ -243,9 +244,9 @@ class XMPhotoPickerController : UIViewController, UICollectionViewDataSource,UIC
             if !isStatusBarHidden {
                 top = top + UIApplication.shared.statusBarFrame.height
             }
-            tableViewHeight = imagePick?.showSelectBtn == true ? view.xm_height - top - toolBar.xm_height : view.xm_height - top
+            tableViewHeight = imagePick?.showSelectBtn == true ? view.xm_height - top - (isIPnoneX ? 64 : 50) : view.xm_height - top
         } else {
-            tableViewHeight = imagePick?.showSelectBtn == true ? view.xm_height  - toolBar.xm_height : view.xm_height
+            tableViewHeight = imagePick?.showSelectBtn == true ? view.xm_height  - (isIPnoneX ? 64 : 50) : view.xm_height
         }
         let itemWH = (self.view.xm_width - CGFloat(self.columnNumber + 1) * itemMargin) / CGFloat(columnNumber)
         layout?.itemSize = CGSize.init(width: itemWH, height: itemWH)
@@ -261,11 +262,11 @@ class XMPhotoPickerController : UIViewController, UICollectionViewDataSource,UIC
 
         var yOffset: CGFloat = 0.0
         if navigationController?.navigationBar.isHidden == false {
-            yOffset = view.xm_height - 50
+            yOffset = view.xm_height - (isIPnoneX ? 64 : 50)
         } else {
-            yOffset = view.xm_height - naviBarHeight - 20 - 50
+            yOffset = view.xm_height - naviBarHeight - 20 - (isIPnoneX ? 64 : 50)
         }
-        toolBar.frame = CGRect.init(x: 0, y: yOffset, width: view.xm_width, height: 50)
+        toolBar.frame = CGRect.init(x: 0, y: yOffset, width: view.xm_width, height: (isIPnoneX ? 64 : 50))
         var previewWidth = xm_LableSize(imagePick?.previewBtnTitleStr ?? "", UIFont.systemFont(ofSize: 16)).width
 
         if imagePick?.allowPreview == false {
@@ -274,15 +275,15 @@ class XMPhotoPickerController : UIViewController, UICollectionViewDataSource,UIC
         if imagePick?.showSelectBtn == false {
             previewWidth = 0
         }
-        previewButton.frame = CGRect.init(x: 10, y: 3, width: previewWidth, height: 44)
+        previewButton.frame = CGRect.init(x: 10, y: (isIPnoneX ? 5 : 3), width: previewWidth, height: 44)
         if imagePick?.allowPickingOriginalPhoto == true {
             let fullImageWidth = xm_LableSize(imagePick?.fullImageBtnTitleStr ?? "", UIFont.systemFont(ofSize: 13)).width
-            originalPhotoButton.frame = CGRect.init(x: previewButton.frame.maxX, y: 0, width: fullImageWidth + 50, height: 50)
-            originalPhotoLabel.frame = CGRect.init(x: fullImageWidth + 46, y: 0, width: 80, height: 50)
+            originalPhotoButton.frame = CGRect.init(x: previewButton.frame.maxX, y: 0, width: fullImageWidth + 50, height: (isIPnoneX ? 54 : 50))
+            originalPhotoLabel.frame = CGRect.init(x: fullImageWidth + 46, y: 0, width: 80, height: (isIPnoneX ? 54 : 50))
 
         }
-        doneButton.frame = CGRect.init(x: view.xm_width - 44 - 12, y: 3, width: 44, height: 44)
-        numberImageView.frame = CGRect.init(x: view.xm_width - 56 - 28, y: 10, width: 30, height: 30)
+        doneButton.frame = CGRect.init(x: view.xm_width - 44 - 12, y: (isIPnoneX ? 5 : 3), width: 44, height: 44)
+        numberImageView.frame = CGRect.init(x: view.xm_width - 56 - 28, y: (isIPnoneX ? 12 : 10), width: 30, height: 30)
         numberLabel.frame = numberImageView.frame
         divideLine.frame = CGRect.init(x: 0, y: 0, width: view.xm_width, height: 1)
         collectionView?.reloadData()
@@ -414,7 +415,6 @@ class XMPhotoPickerController : UIViewController, UICollectionViewDataSource,UIC
             index = index - 1
         }
         let model = models[index]
-
         cell?.allowPickingMultipleVideo = imagePick?.allowPickingMultipleVideo ?? false
         cell?.photoDefImageName = imagePick?.photoDefImageName ?? ""
         cell?.photoSelImageName = imagePick?.photoSelImageName ?? ""
@@ -427,6 +427,11 @@ class XMPhotoPickerController : UIViewController, UICollectionViewDataSource,UIC
         cell?.imageProgressUpdate = {[weak self] in
             self?.showPhotoBytes()
         }
+        if let i = imagePick?.selectedModels.index(of: model) {
+            cell?.title = imagePick?.showTitle(index: i)
+        } else {
+            cell?.title = nil
+        }
         cell?.didSelectPhoto = {[weak self] (isSelected) in
             if isSelected {
                 weakCell?.selectPhotoButton.isSelected = false
@@ -435,6 +440,7 @@ class XMPhotoPickerController : UIViewController, UICollectionViewDataSource,UIC
                     for itmeModel in imagePick!.selectedModels {
                         if XMImageManager.manager.getAssetIdentifier(asset: model.asset) == XMImageManager.manager.getAssetIdentifier(asset: itmeModel.asset) {
                             imagePick?.selectedModels.xm_remover(obj: itmeModel)
+                            weakCell?.title = nil
                             break
                         }
                     }
@@ -446,6 +452,9 @@ class XMPhotoPickerController : UIViewController, UICollectionViewDataSource,UIC
                         weakCell?.selectPhotoButton.isSelected = true
                         model.isSelected = true
                         imagePick?.selectedModels.append(model)
+                        if let i = imagePick?.selectedModels.index(of: model) {
+                            weakCell?.title = imagePick?.showTitle(index: i)
+                        }
                         self?.refreshBottomToolBarStatus()
                     } else {
                         imagePick?.showAlertWithTitle(title: String.init(format: Bundle.xm_localizedString(key: "Select a maximum of %zd photos"), imagePick!.maxImagesCount))
